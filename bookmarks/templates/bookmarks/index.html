@@ -1,0 +1,12 @@
+{% load static %}
+
+{% if bookmark_list %}
+    <ul>
+        {% for bookmark in bookmark_list %}
+            <li>{{ bookmark.name }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No bookmarks have been added</p>
+{% endif %}
+
