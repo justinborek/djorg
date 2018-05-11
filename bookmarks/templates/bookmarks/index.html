@@ -1,12 +1,15 @@
-{% load static %}
+{% extends "djorg_base.html" %}
 
-{% if bookmark_list %}
+{% block content %}
+
+{% if bookmarks %}
     <ul>
-        {% for bookmark in bookmark_list %}
+        {% for bookmark in bookmarks %}
             <li>{{ bookmark.name }}</li>
         {% endfor %}
     </ul>
 {% else %}
     <p>No bookmarks have been added</p>
 {% endif %}
-
+{% include "bookmarks/form.html" %}
+{% endblock %}

@@ -1,13 +1,14 @@
-from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect, HttpResponse
-from django.urls import reverse
-from django.views import generic
+from django.shortcuts import render
 
+from .forms import BookmarkForm
 from .models import Bookmark
 
-class IndexView(generic.ListView):
-    template_name = 'bookmarks/index.html'
-    context_object_name = 'bookmark_list'
-
-    def get_queryset(self):
-        return Bookmark.objects.order_by('name')
+def index(request):
+    if request.method == 'POST':
+        form = BookmarkForm(request.POST)
+        if form.is_valid():
+          form.save()  
+    context = {}
+    context['bookmarks'] = Bookmark.objects.all()
+    context['form'] = BookmarkForm()
+    return render(request, 'bookmarks/index.html', context)
