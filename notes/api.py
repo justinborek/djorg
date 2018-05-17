@@ -10,7 +10,7 @@ class NoteSerializer(serializers.HyperlinkedModelSerializer):
 
     def create(self, validated_data):
         user = self.context['request'].user
-        Note.objects.create(user=user, **validated_data)
+        note = Note.objects.create(user=user, **validated_data)
         return note
 
 class NoteViewSet(viewsets.ModelViewSet):
